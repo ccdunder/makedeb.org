@@ -18,13 +18,18 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
-      - name: Setup makedeb APT repositories
-        uses: makedeb/setup-makedeb@main
+      #- name: Setup makedeb APT repositories
+      #  uses: makedeb/setup-makedeb@main
+      #  with:
+      #    makedeb-repo: false
+      #    pbmpr-repo: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          makedeb-repo: false
-          pbmpr-repo: true
-      - name: Install Hugo
-        run: sudo apt-get install hugo -y
+          hugo-version: '0.119.0'
+          extended: true
+      #- name: Install Hugo
+      #  run: sudo apt-get update && sudo apt-get install hugo -y
       - name: Build site
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload site artifact
